@@ -1,20 +1,50 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const App =()=>{
+  const [text, setText] = useState('');
+  const [deadLine, setDeadLine] = useState('');
+  const [todoList, setTodoList] = useState([""]);
+  const [progressTodoList, setProgressTodoList] = useState([""]);
+  const onChangeTodoText =(e)=> setText(e.target.value);
+  const onChangeDeadLine =(e)=> setDeadLine(e.target.value);
+  const onClickAdd =()=> {
+    const listContent = `やること:${text}  締め切り日程:${deadLine}`;
+    const newTodos = [...todoList, listContent];
+    setTodoList(newTodos);
+    setText('');
+    setDeadLine('');
+  }
   return(
     <section className="wrap">
-      <div>
-        <input type="text" />
-        <input type="date" />
-        <button>Todoタスクを追加</button>
+      <div className="input-area">
+        <input type="text" value={text} onChange={onChangeTodoText} />
+        <input type="date" value={deadLine} onChange={onChangeDeadLine} />
+        <button onClick={onClickAdd}>Todoタスクを追加</button>
       </div>
       <div className="todo-area">
-        <div>
-          
+        <div className="todo-list">
+          <h2>作業前</h2>
+          <ul>
+            {todoList.map((todo,index) => {
+              return(
+                <li key={todo}>
+                  <span>{index}: {todo}</span>
+                  <button>進行中へ移動</button>
+                  <button>削除</button>
+                </li>
+                )
+            })}
+          </ul>
         </div>
-        <div>
+        <div className="todo-list-progress">
+          <h2>進行中</h2>
+          <ul>
+
+          </ul>
         </div>
-        <div>
+        <div className="todo-list-complate">
+          <h2>完了済み</h2>
+          <ul></ul>
         </div>
       </div>
     </section>
