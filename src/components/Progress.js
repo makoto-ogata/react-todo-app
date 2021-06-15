@@ -7,9 +7,11 @@ const Progress =(props)=> {
         {progressTodoList.map((todo,index) => {
           return(
             <li key={todo}>
-              <span>{todo}</span>
-              <button onClick={()=> onClickBackTodos(index)}>戻す</button>
-              <button onClick={()=> onClickDone(index)}>完了</button>
+              <p>{todo}</p>
+              <div className="btn-wrap">
+                <button onClick={()=> onClickBackTodos(index)}>戻す</button>
+                <button onClick={()=> onClickDone(index)}>完了</button>
+              </div>
             </li>
           )
         })}

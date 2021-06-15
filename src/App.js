@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Input from "./components/Input"
 import Todo from "./components/Todo"
 import Progress from './components/Progress';
+import Done from './components/Done';
 
 const App =()=>{
   const [text, setText] = useState('');
@@ -12,7 +13,7 @@ const App =()=>{
   const onChangeTodoText =(e)=> setText(e.target.value);
   const onChangeDeadLine =(e)=> setDeadLine(e.target.value);
   const onClickAdd =()=> {
-    const listContent = `やること:${text}  締め切り日程:${deadLine}`;
+    const listContent = `・やること:${text} \n・締め切り日程:${deadLine}`;
     const newTodos = [...todoList, listContent];
     setTodoList(newTodos);
     setText('');
@@ -64,22 +65,10 @@ const App =()=>{
   return(
     <section className="wrap">
       <Input onChangeTodoText={onChangeTodoText} onClickAdd={onClickAdd} onChangeDeadLine={onChangeDeadLine} text={text} deadLine={deadLine}/>
-      <div className="todo-area">
+      <div className="all-todo-area">
         <Todo todoList={todoList} onClickProgress={onClickProgress} onClickDelete={onClickDelete} />
         <Progress progressTodoList={progressTodoList} onClickBackTodos={onClickBackTodos} onClickDone={onClickDone} />
-        <div className="todo-list-done">
-          <h2>完了済み</h2>
-          <ul>
-            {doneTodoList.map((todo,index) => {
-              return(
-                <li key={todo}>
-                  <span>{todo}</span>
-                  <button onClick={()=> onClickBackProgress(index)}>進行中に戻す</button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        <Done doneTodoList={doneTodoList} onClickBackProgress={onClickBackProgress}/>
       </div>
     </section>
   );

@@ -7,9 +7,11 @@ const Todo =(props)=> {
         {todoList.map((todo,index) => {
           return(
             <li key={todo}>
-              <span>{todo}</span>
-              <button onClick={()=> onClickProgress(index)}>進行中へ移動</button>
-              <button onClick={()=> onClickDelete(index)}>削除</button>
+              <p>{todo}</p>
+              <div className="btn-wrap">
+                <button onClick={()=> onClickProgress(index)}>進行中へ移動</button>
+                <button onClick={()=> onClickDelete(index)}>削除</button>
+              </div>
             </li>
           )
         })}
