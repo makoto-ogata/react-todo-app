@@ -3,8 +3,9 @@ import React, {useState} from 'react';
 const App =()=>{
   const [text, setText] = useState('');
   const [deadLine, setDeadLine] = useState('');
-  const [todoList, setTodoList] = useState([""]);
-  const [progressTodoList, setProgressTodoList] = useState([""]);
+  const [todoList, setTodoList] = useState([]);
+  const [progressTodoList, setProgressTodoList] = useState([]);
+  const [doneTodoList, setDoneTodoList] = useState([]);
   const onChangeTodoText =(e)=> setText(e.target.value);
   const onChangeDeadLine =(e)=> setDeadLine(e.target.value);
   const onClickAdd =()=> {
@@ -22,13 +23,41 @@ const App =()=>{
   }
 
   const onClickProgress =(index)=> {
-    const newTodos = [...todoList];
-    newTodos.splice(index, 1);
+    const newSetTodos = [...todoList];
+    newSetTodos.splice(index, 1);
 
     const newProgressTodos = [...progressTodoList, todoList[index]];
-    setTodoList(newTodos);
+    setTodoList(newSetTodos);
     setProgressTodoList(newProgressTodos);
   }
+
+  const onClickDone =(index)=> {
+    const deleteProgressTodos = [...progressTodoList];
+    deleteProgressTodos.splice(index, 1);
+
+    const newDoneTodos = [...doneTodoList, progressTodoList[index]];
+    setDoneTodoList(newDoneTodos);
+    setProgressTodoList(deleteProgressTodos);
+  }
+
+  const onClickBackTodos =(index)=> {
+    const backProgressTodos = [...progressTodoList];
+    backProgressTodos.splice(index, 1);
+
+    const backTodos = [...todoList, progressTodoList[index]];
+    setTodoList(backTodos);
+    setProgressTodoList(backProgressTodos);
+  }
+
+  const onClickBackProgress =(index)=> {
+    const deleteDoneTodos = [...doneTodoList];
+    deleteDoneTodos.splice(index, 1);
+
+    const backProgressTodos = [...progressTodoList, doneTodoList[index]];
+    setProgressTodoList(backProgressTodos);
+    setDoneTodoList(deleteDoneTodos);
+  }
+
   return(
     <section className="wrap">
       <div className="input-area">
@@ -45,7 +74,7 @@ const App =()=>{
             {todoList.map((todo,index) => {
               return(
                 <li key={todo}>
-                  <span>{index}: {todo}</span>
+                  <span>{todo}</span>
                   <button onClick={()=> onClickProgress(index)}>進行中へ移動</button>
                   <button onClick={()=> onClickDelete(index)}>削除</button>
                 </li>
@@ -59,9 +88,9 @@ const App =()=>{
             {progressTodoList.map((todo,index) => {
               return(
                 <li key={todo}>
-                  <span>{index}: {todo}</span>
-                  <button onClick={}>戻す</button>
-                  <button onClick={}>完了</button>
+                  <span>{todo}</span>
+                  <button onClick={()=> onClickBackTodos(index)}>戻す</button>
+                  <button onClick={()=> onClickDone(index)}>完了</button>
                 </li>
               )
             })}
@@ -69,7 +98,16 @@ const App =()=>{
         </div>
         <div className="todo-list-done">
           <h2>完了済み</h2>
-          <ul></ul>
+          <ul>
+            {doneTodoList.map((todo,index) => {
+              return(
+                <li key={todo}>
+                  <span>{todo}</span>
+                  <button onClick={()=> onClickBackProgress(index)}>進行中に戻す</button>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </div>
     </section>
