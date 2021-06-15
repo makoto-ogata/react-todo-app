@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Input from "./components/Input"
 import Todo from "./components/Todo"
+import Progress from './components/Progress';
 
 const App =()=>{
   const [text, setText] = useState('');
@@ -65,20 +66,7 @@ const App =()=>{
       <Input onChangeTodoText={onChangeTodoText} onClickAdd={onClickAdd} onChangeDeadLine={onChangeDeadLine} text={text} deadLine={deadLine}/>
       <div className="todo-area">
         <Todo todoList={todoList} onClickProgress={onClickProgress} onClickDelete={onClickDelete} />
-        <div className="todo-list-progress">
-          <h2>進行中</h2>
-          <ul>
-            {progressTodoList.map((todo,index) => {
-              return(
-                <li key={todo}>
-                  <span>{todo}</span>
-                  <button onClick={()=> onClickBackTodos(index)}>戻す</button>
-                  <button onClick={()=> onClickDone(index)}>完了</button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        <Progress progressTodoList={progressTodoList} onClickBackTodos={onClickBackTodos} onClickDone={onClickDone} />
         <div className="todo-list-done">
           <h2>完了済み</h2>
           <ul>
