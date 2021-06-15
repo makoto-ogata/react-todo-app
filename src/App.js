@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Input from "./components/Input"
 
 const App =()=>{
   const [text, setText] = useState('');
@@ -60,13 +61,7 @@ const App =()=>{
 
   return(
     <section className="wrap">
-      <div className="input-area">
-        <label>TODOを記入して下さい</label>
-        <input type="text" value={text} placeholder="TODOを記入" onChange={onChangeTodoText} />
-        <label>TODOの締め切りを決めて下さい</label>
-        <input type="date" value={deadLine} onChange={onChangeDeadLine} />
-        <button onClick={onClickAdd}>Todoタスクを追加</button>
-      </div>
+      <Input onChangeTodoText={onChangeTodoText} onClickAdd={onClickAdd} onChangeDeadLine={onChangeDeadLine} text={text} deadLine={deadLine}/>
       <div className="todo-area">
         <div className="todo-list">
           <h2>作業前</h2>
