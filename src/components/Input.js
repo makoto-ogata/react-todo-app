@@ -10,7 +10,7 @@ const Input =(props)=> {
         <input type="date" value={deadLine} onChange={onChangeDeadLine} />
       <div>
       </div>
-      <button onClick={onClickAdd}>Todoタスクを追加</button>
+      <button onClick={onClickAdd} disabled={text === '' || deadLine === ''}>Todoタスクを追加</button>
     </div>
   )
 }
