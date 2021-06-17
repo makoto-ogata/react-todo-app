@@ -7,7 +7,9 @@ const Done =(props)=> {
         {doneTodoList.map((todo,index) => {
           return(
             <li key={todo}>
-              <p>{todo}</p>
+              <p>ID: {todo[0]}</p>
+              <p>TODO: {todo[1]}</p>
+              <p>締め切り: {todo[2]}</p>
               <div className="btn-wrap">
                 <button onClick={()=> onClickBackProgress(index)}>進行中に戻す</button>
               </div>

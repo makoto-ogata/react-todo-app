@@ -13,7 +13,8 @@ const App =()=>{
   const onChangeTodoText =(e)=> setText(e.target.value);
   const onChangeDeadLine =(e)=> setDeadLine(e.target.value);
   const onClickAdd =()=> {
-    const listContent = `・やること:${text} \n・締め切り日程:${deadLine}`;
+    const id = Math.floor(Math.random() * 1000);
+    const listContent = [id, text, deadLine];
     const newTodos = [...todoList, listContent];
     setTodoList(newTodos);
     setText('');

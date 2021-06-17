@@ -6,9 +6,9 @@ const Input =(props)=> {
         <label>TODOを記入して下さい</label>
         <input type="text" value={text} placeholder="TODOを記入" onChange={onChangeTodoText} />
       </div>
+      <div>
         <label>TODOの締め切りを決めて下さい</label>
         <input type="date" value={deadLine} onChange={onChangeDeadLine} />
-      <div>
       </div>
       <button onClick={onClickAdd} disabled={text === '' || deadLine === ''}>Todoタスクを追加</button>
     </div>
